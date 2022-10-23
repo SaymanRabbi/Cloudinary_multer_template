@@ -22,11 +22,11 @@ app.post('/file-upload',upload.array('image',12),async(req,res)=>{
           return res.status(500).send(err);
         }
         removeTmp(req.files[i].path);
-        imgArr.push({ public_id: result.public_id, url: result.secure_url });
-        res.status(200).send(response);
+        imgArr.push({url: result.secure_url});
        });
-        
       }
+      // -------send the result to the client
+      res.status(200).send(imgArr);
   } catch (error) {
     res.status(500).send(error);
   }
